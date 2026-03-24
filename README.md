@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# Naadu Civic Accountability Platform 🗳️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Naadu is a community-driven, privacy-first civic accountability platform built to digitize and track the resolution of local issues across electoral constituencies in Kerala. It aims to bridge the gap between citizens (civic volunteers) and their elected MLAs through transparent, immutable public ledgers of civic issues.
 
-## Get started
+## 📱 Project Status (V1 MVP)
 
-1. Install dependencies
+Currently, the project is in the **UI Shell Phase** for the Kerala-only MVP. 
+The complete Frontend navigation, UI styling, and interactions have been built using **React Native (Expo)** and **NativeWind (Tailwind CSS)**.
 
+### Features
+- ✅ **Authentication**: Zero-Trust Mobile OTP verification flow (UI ready).
+- ✅ **Sovereign Identity Setup**: Users securely link their anonymous identity to their voting district and constituency.
+- ✅ **Constituency Discovery Map**: Kerala drill-down view showing active issue hotspots and MLA satisfaction scores.
+- ✅ **5-Step Issue Reporting**: Location -> Category -> Details -> Evidence (Photos) -> Review -> Submit.
+- ✅ **Community Feed (Explore)**: Reddit-style scrolling feed of verified civic issues.
+
+## 🛠️ Technology Stack
+- **Framework**: React Native with [Expo Router](https://docs.expo.dev/router/introduction/)
+- **Styling**: [NativeWind](https://www.nativewind.dev/) (Tailwind CSS)
+- **Backend Infrastructure (Planned)**: Firebase (Firestore, Cloud Functions, Authentication)
+- **Mapping (Planned)**: Mapbox GL JS / RN Maps
+- **Security Strategy**: Hashed PII (SHA-256), geo-coordinate truncation (3 decimal points), and strict Firestore read-only Security Rules.
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+
+### Installation & Running
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/JeswinJestin/Naadu-Civic-App.git
+   ```
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. **Start the development server:**
    ```bash
-   npx expo start
+   npm start        # For Expo Go / Mobile Emulators
+   npm run web      # To build & run on a local web server
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🔐 Privacy & Moderation
+The platform strictly runs on a Zero-Trust architecture, adhering to the DPDP Act. Absolute phone numbers are never stored (only salted hashes). Issues undergo a 500m radius multi-factor anti-spam check and a dual-layer moderation (Auto-flagging dictionary + Community consensus) before becoming visibly verified.
