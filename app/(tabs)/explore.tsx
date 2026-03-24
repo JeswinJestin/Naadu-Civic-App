@@ -1,112 +1,101 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
-
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
-        </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+      {/* Header */}
+      <View className="flex-row items-center justify-between px-6 py-4 bg-surface/90">
+        <View className="flex-row items-center gap-4">
+          <TouchableOpacity className="p-2 -ml-2 rounded-full overflow-hidden active:bg-surface-container-high transition-colors">
+            <MaterialIcons name="menu" size={24} color="#f5a623" />
+          </TouchableOpacity>
+          <Text className="text-xl font-bold text-primary tracking-tight">Activity Feed</Text>
+        </View>
+        <View className="h-9 w-9 rounded-full overflow-hidden border-2 border-primary/20 bg-surface-container-high">
+            <Image 
+              source={{ uri: 'https://i.pravatar.cc/150?img=68' }}
+              className="w-full h-full"
+            />
+        </View>
+      </View>
+
+      <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* Filter Tabs */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-2 mb-6">
+          <TouchableOpacity className="px-6 py-2 rounded-full bg-primary-container mr-2">
+            <Text className="text-on-primary-container font-bold text-sm">All</Text>
+          </TouchableOpacity>
+          <TouchableOpacity className="px-6 py-2 rounded-full bg-surface-container-high mr-2">
+            <Text className="text-on-surface-variant font-bold text-sm">My Issues</Text>
+          </TouchableOpacity>
+          <TouchableOpacity className="px-6 py-2 rounded-full bg-surface-container-high mr-2">
+            <Text className="text-on-surface-variant font-bold text-sm">Nearby</Text>
+          </TouchableOpacity>
+        </ScrollView>
+
+        <View className="gap-6 mt-2">
+          {/* Milestone Card */}
+          <View className="overflow-hidden p-6 rounded-xl bg-surface-container-low border-l-4 border-primary shadow-lg">
+            <View className="flex-row items-center gap-2 mb-2">
+              <MaterialIcons name="military-tech" size={28} color="#ffc880" />
+              <Text className="text-[10px] uppercase tracking-widest text-[#ffc880] font-bold">Community Victory</Text>
+            </View>
+            <Text className="text-lg font-bold text-white leading-tight mb-2">Constituency Milestone: 50 issues resolved this month in Kochi!</Text>
+            <Text className="text-on-surface-variant text-sm">Together, we are building a more responsive governance model.</Text>
+          </View>
+
+          {/* New Issue Reported */}
+          <View className="p-5 rounded-xl bg-surface-container-low">
+            <View className="flex-row items-start gap-4">
+              <View className="bg-surface-container-high p-3 rounded-lg">
+                <MaterialIcons name="traffic" size={24} color="#ffc880" />
+              </View>
+              <View className="flex-1">
+                <View className="flex-row justify-between items-start mb-1">
+                  <Text className="text-sm text-on-surface flex-[0.8] leading-snug">
+                    <Text className="text-primary font-bold">SilverLotus</Text> reported a new <Text className="font-bold">Road</Text> issue
+                  </Text>
+                  <Text className="text-[10px] text-on-surface-variant/60 mt-1">2h ago</Text>
+                </View>
+                <Text className="text-sm text-[#adb9d1] mb-4 mt-1 leading-snug">Pothole detected near Secretariat entrance, Thiruvananthapuram. Impeding traffic flow.</Text>
+                <View className="flex-row items-center gap-3">
+                  <TouchableOpacity className="px-4 py-2 bg-primary-container rounded-lg">
+                    <Text className="text-[#644000] text-xs font-bold">View Details</Text>
+                  </TouchableOpacity>
+                  <View className="flex-row items-center gap-1">
+                    <MaterialIcons name="location-on" size={14} color="#d7c3ae" />
+                    <Text className="text-[11px] text-on-surface-variant">Thiruvananthapuram</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          {/* Issue Resolved Card */}
+          <View className="p-5 rounded-xl bg-surface-container-low border-l-4 border-primary">
+            <View className="flex-row items-start gap-4">
+              <View className="bg-primary/20 p-3 rounded-full">
+                <MaterialIcons name="check-circle" size={24} color="#ffc880" />
+              </View>
+              <View className="flex-1">
+                <View className="flex-row justify-between items-start mb-1">
+                  <Text className="text-sm font-bold text-primary">ISSUE RESOLVED</Text>
+                  <Text className="text-[10px] text-on-surface-variant/60 mt-1">5h ago</Text>
+                </View>
+                <Text className="text-on-surface leading-snug mt-1">The <Text className="font-bold text-primary">'Water Leak'</Text> issue on MG Road has been marked as RESOLVED by the MLA.</Text>
+                <View className="mt-4 flex-row items-center gap-2">
+                  <View className="h-5 w-5 rounded-full bg-surface-container-high border border-primary/30 items-center justify-center">
+                    <MaterialIcons name="verified" size={12} color="#ffc880" />
+                  </View>
+                  <Text className="text-[10px] font-bold tracking-wide text-on-surface-variant uppercase">Verified by Civic Audit Team</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-});

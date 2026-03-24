@@ -1,98 +1,72 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+export default function MapScreen() {
+  const router = useRouter();
 
-export default function HomeScreen() {
+  const handleReport = () => {
+    // Navigate to report flow
+    router.push('/(report)/location' as never);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View className="flex-1 bg-[#0d1117] relative">
+      <SafeAreaView edges={['top']} className="absolute top-0 w-full z-50">
+        <View className="flex-row items-center justify-between px-6 py-2">
+            <View className="bg-surface-dim/80 px-4 py-2 rounded-full flex-row items-center">
+                <Text className="text-primary font-bold text-xl tracking-tighter">Naadu</Text>
+            </View>
+            <View className="flex-row items-center gap-2">
+                <TouchableOpacity className="w-10 h-10 rounded-full bg-surface-dim/80 items-center justify-center">
+                    <MaterialIcons name="search" size={20} color="#dfe2eb" />
+                </TouchableOpacity>
+                <TouchableOpacity className="w-10 h-10 rounded-full bg-surface-dim/80 items-center justify-center">
+                    <MaterialIcons name="notifications" size={20} color="#dfe2eb" />
+                </TouchableOpacity>
+            </View>
+        </View>
+      </SafeAreaView>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {/* Mock Map Background */}
+      <View className="flex-1 opacity-60">
+        <Image 
+           source={{ uri: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnpH_zh1uXJUjmCqiRbvILj0cdAWiDO119acfGh3Msf_B8s5wKG_q7G95fW35DvNUv9hg9ejUKQ_SDG3uC79kgh83z4brMkYcDdN04A8zU1ONRa1fKOp8kWJq67MHI7bjP_0_GOiMOwm7_EACfLbA83cb1MtPzVWdSb9lOqBXia_tafmxcrrw55KSs4GF6zHFGkkU4AwC-fUzTHxoRawEg1ubhrV36zKMlxN4gBHKSKP240w0QVUrBXkHBYqFIgkn36Jin1z5S3IQ' }}
+           className="w-full h-full"
+           resizeMode="cover"
+        />
+      </View>
+
+      {/* Mock Map Marker Info */}
+      <View className="absolute top-1/2 left-4 right-4 z-30 bg-surface-container-high/90 p-4 rounded-xl shadow-2xl border-l-4 border-primary-container">
+        <View className="flex-row justify-between mb-2">
+            <Text className="font-bold text-lg text-on-surface">Thiruvananthapuram Central</Text>
+            <Text className="text-[10px] font-mono px-2 py-1 bg-surface-container-highest text-primary rounded">TVM-01</Text>
+        </View>
+        <View className="flex-row justify-between mt-4 pr-10">
+            <View>
+                <Text className="text-[10px] font-mono uppercase text-on-surface-variant">Active Issues</Text>
+                <Text className="text-xl font-bold text-error">42</Text>
+            </View>
+            <View>
+                <Text className="text-[10px] font-mono uppercase text-on-surface-variant">Satisfaction</Text>
+                <Text className="text-xl font-bold text-primary">4.2<Text className="text-xs text-on-surface-variant">/5</Text></Text>
+            </View>
+        </View>
+        <TouchableOpacity className="mt-4 pt-3 border-t border-outline-variant/20 flex-row items-center gap-2">
+            <Text className="text-primary text-sm font-bold">View Constituency Details</Text>
+            <MaterialIcons name="arrow-forward" size={16} color="#f5a623" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Floating Action Button */}
+      <TouchableOpacity 
+          onPress={handleReport}
+          className="absolute bottom-6 right-6 z-40 w-14 h-14 bg-primary-container rounded-full items-center justify-center shadow-lg shadow-primary-container/30"
+      >
+        <MaterialIcons name="add" size={32} color="#452b00" />
+      </TouchableOpacity>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
