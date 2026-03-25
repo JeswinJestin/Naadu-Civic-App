@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Alert, ScrollView } from 'react-native';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { Colors, Typography, Spacing } from '../../constants/theme';
+import { Colors, Typography, Spacing } from '../../themes/theme';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PollScreen() {

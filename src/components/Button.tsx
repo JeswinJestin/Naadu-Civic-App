@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
-import { Colors, Typography } from '../constants/theme';
+import { Colors, Typography } from '../themes/theme';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'accent';
 

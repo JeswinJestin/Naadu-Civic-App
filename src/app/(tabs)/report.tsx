@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
-import { Colors, Typography, Spacing } from '../../constants/theme';
+import { Colors, Typography, Spacing } from '../../themes/theme';
 
 const CATEGORIES = ['Roads', 'Water', 'Sanitation', 'Health', 'Education', 'Hazards', 'Community', 'Other'];
 
