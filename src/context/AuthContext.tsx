@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase/firebaseConfig';
+import { auth } from '../../firebase/firebaseConfig';
 import { useRouter, useSegments } from 'expo-router';
 
 interface AuthContextType {
