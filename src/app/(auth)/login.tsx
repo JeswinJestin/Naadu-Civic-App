@@ -59,6 +59,21 @@ export default function LoginScreen() {
             <Text className="text-on-primary font-bold text-lg mr-2">Send OTP</Text>
             <MaterialIcons name="arrow-forward" size={20} color="#452b00" />
           </TouchableOpacity>
+
+          <View className="flex-row items-center justify-center w-full my-6">
+            <View className="flex-1 h-[1px] bg-outline-variant/30" />
+            <Text className="mx-4 text-on-surface-variant text-sm font-semibold">Or continue with</Text>
+            <View className="flex-1 h-[1px] bg-outline-variant/30" />
+          </View>
+
+          <TouchableOpacity 
+            onPress={() => router.push('/(tabs)/explore' as never)}
+            className="w-full h-14 bg-surface-container-highest border border-outline-variant/50 rounded-xl items-center justify-center flex-row active:bg-surface-bright transition-colors"
+          >
+            <MaterialIcons name="account-circle" size={24} color="#f5a623" />
+            <Text className="text-on-surface font-semibold text-lg ml-3">Continue with Google</Text>
+          </TouchableOpacity>
+
           <Text className="text-[10px] text-on-surface-variant/60 tracking-tighter uppercase text-center mt-6">
             By continuing, you agree to the Terms of Service and Privacy Policy
           </Text>

@@ -48,10 +48,10 @@ export default function SplashScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity 
-            onPress={() => router.push('/(auth)/login')} 
+            onPress={() => router.push('/onboarding')} 
             className="w-full h-16 bg-surface-container-high rounded-lg items-center justify-center active:bg-surface-container-highest"
           >
-            <Text className="text-primary font-semibold text-lg tracking-tight">Login / Register</Text>
+            <Text className="text-primary font-semibold text-lg tracking-tight">Get Started</Text>
           </TouchableOpacity>
         </View>
 
