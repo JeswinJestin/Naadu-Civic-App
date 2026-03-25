@@ -31,10 +31,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="impact"
+        name="poll"
         options={{
-          title: 'Impact',
-          tabBarIcon: ({ color }) => <MaterialIcons name="military-tech" size={24} color={color} />,
+          title: 'Polls',
+          tabBarIcon: ({ color }) => <MaterialIcons name="how-to-vote" size={24} color={color} />,
         }}
       />
       <Tabs.Screen

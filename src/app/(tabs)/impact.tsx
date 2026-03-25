@@ -42,7 +42,7 @@ export default function ImpactScreen() {
                  It's time to rate your MLA's performance for this month. Your sovereign vote shapes the constituency leaderboard.
               </Text>
               <TouchableOpacity 
-                 onPress={() => router.push('/(tabs)/poll' as never)}
+                 onPress={() => router.push('/poll' as never)}
                  className="bg-surface border border-primary/30 py-3 rounded-lg items-center active:bg-surface-container"
               >
                  <Text className="text-primary font-bold">Take The Poll</Text>
@@ -73,7 +73,7 @@ export default function ImpactScreen() {
               </View>
 
               <TouchableOpacity 
-                 onPress={() => router.push('/constituency/TVM-01')}
+                 onPress={() => router.push('/constituency/TVM-01' as never)}
                  className="mt-6 flex-row items-center justify-center gap-2"
               >
                  <Text className="text-primary font-bold text-sm">View Full Rankings</Text>

@@ -32,7 +32,7 @@ export default function ProfileScreen() {
            <View>
               <Text className="font-mono text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">Registered Constituency</Text>
               <TouchableOpacity 
-                 onPress={() => router.push('/constituency/TVM-01')}
+                 onPress={() => router.push('/constituency/TVM-01' as never)}
                  className="bg-surface-container p-4 rounded-lg flex-row items-center justify-between border border-surface-container-highest active:bg-surface-container-highest transition-colors"
               >
                  <View className="flex-row items-center gap-3">
