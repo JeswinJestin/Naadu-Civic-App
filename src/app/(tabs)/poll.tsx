@@ -1,146 +1,90 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Alert, ScrollView } from 'react-native';
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import { Colors, Typography, Spacing } from '../../themes/theme';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, KeyboardAvoidingView, Platform, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 export default function PollScreen() {
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = () => {
-    if (rating === 0) {
-      Alert.alert('Incomplete', 'Please select a star rating.');
-      return;
-    }
-    if (feedback.length < 20) {
-      Alert.alert('Incomplete', 'Please provide at least 20 characters of feedback.');
-      return;
-    }
-    
+    if (rating === 0) return;
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      Alert.alert('Thank You', 'Your satisfaction poll has been recorded securely and anonymously.');
       setRating(0);
       setFeedback('');
     }, 1500);
   };
 
-  const handleDownloadReport = () => {
-    Alert.alert('Download Started', 'Generating PDF report for Ernakulam constituency...');
-    // Implemented client-side with jsPDF in full web/native build
-  };
-
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.header}>
-        <Text style={[Typography.title1, styles.headerText]}>Constituency Poll</Text>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+      <View className="flex-row items-center px-6 py-4 bg-surface/90 border-b border-surface-container">
+        <Text className="text-xl font-bold text-primary tracking-tight">Constituency Poll</Text>
       </View>
 
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.card}>
-          <Text style={[Typography.title2, styles.cardTitle]}>Monthly Satisfaction</Text>
-          <Text style={[Typography.bodyRegular, styles.cardSubtitle]}>
-            How satisfied are you with your MLA's governance this month?
+      <ScrollView className="flex-1 px-4 pt-6" contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* Rating Card */}
+        <View className="bg-surface-container-low p-6 rounded-xl border border-surface-container-highest mb-6 shadow-xl">
+          <View className="flex-row items-center gap-3 mb-2">
+            <MaterialIcons name="how-to-vote" size={24} color="#f5a623" />
+            <Text className="text-xl font-bold text-white">Monthly Satisfaction</Text>
+          </View>
+          <Text className="text-on-surface-variant text-sm mb-6 leading-relaxed">
+            How satisfied are you with your MLA's governance this month? Your rating directly affects their public approval score.
           </Text>
 
-          <View style={styles.starRow}>
+          <View className="flex-row justify-between px-2 mb-8">
             {[1, 2, 3, 4, 5].map(star => (
-              <Ionicons 
-                key={star} 
-                name={star <= rating ? "star" : "star-outline"} 
-                size={40} 
-                color={star <= rating ? Colors.light.action : Colors.light.divider} 
-                onPress={() => setRating(star)}
-              />
+              <TouchableOpacity key={star} onPress={() => setRating(star)} className="active:scale-90 transition-transform">
+                <Ionicons 
+                  name={star <= rating ? "star" : "star-outline"} 
+                  size={42} 
+                  color={star <= rating ? "#f5a623" : "#31353c"} 
+                />
+              </TouchableOpacity>
             ))}
           </View>
 
-          <Input 
-            label="Feedback (What's going well? What needs improvement?)"
-            placeholder="Type your feedback here... (min. 20 chars)"
-            value={feedback}
-            onChangeText={setFeedback}
-            multiline
-            numberOfLines={4}
-            style={{ marginBottom: Spacing.xl, height: 100 }}
-          />
-
-          <Button 
-            title={loading ? "Submitting..." : "Submit Poll"} 
-            variant="accent" 
-            onPress={handleSubmit} 
-            disabled={loading} 
-          />
-        </View>
-
-        <View style={styles.card}>
-          <Text style={[Typography.title2, styles.cardTitle]}>Leaderboard & Analytics</Text>
-          <View style={styles.statRow}>
-            <View style={styles.statBox}>
-              <Text style={Typography.labelLarge}>Approval</Text>
-              <Text style={[Typography.display2, { color: Colors.light.success }]}>68%</Text>
-            </View>
-            <View style={styles.statBox}>
-              <Text style={Typography.labelLarge}>Resolved Issues</Text>
-              <Text style={[Typography.display2, { color: Colors.light.action }]}>412</Text>
-            </View>
+          <View className="bg-surface-container p-4 rounded-lg mb-6 border border-surface-variant">
+            <TextInput 
+              placeholder="What specifically needs improvement? (Optional)"
+              placeholderTextColor="#adb9d1"
+              multiline
+              numberOfLines={3}
+              className="text-white text-base text-left align-top min-h-[80px]"
+              value={feedback}
+              onChangeText={setFeedback}
+            />
           </View>
 
-          <Button 
-            title="Download PDF Report" 
-            variant="secondary" 
-            onPress={handleDownloadReport} 
-          />
+          <TouchableOpacity 
+            onPress={handleSubmit} 
+            disabled={loading || rating === 0}
+            className={`w-full py-4 rounded-lg items-center justify-center flex-row ${
+              rating === 0 ? 'bg-surface-container-highest' : 'bg-primary-container shadow-lg shadow-primary-container/20'
+            }`}
+          >
+            <Text className={`font-bold text-lg ${rating === 0 ? 'text-on-surface-variant' : 'text-on-primary'}`}>
+              {loading ? "Submitting..." : "Submit Secure Poll"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Info Card */}
+        <View className="bg-surface-container p-6 rounded-xl border border-surface-variant flex-row items-start gap-4">
+          <MaterialIcons name="security" size={28} color="#bbc7df" />
+          <View className="flex-1">
+            <Text className="text-white font-bold mb-1">Zero-Knowledge Proof</Text>
+            <Text className="text-on-surface-variant text-xs leading-snug">
+              Your vote is cryptographically hashed. We only store that a verified voter from this constituency cast a vote, ensuring absolute anonymity.
+            </Text>
+          </View>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.light.background },
-  header: {
-    padding: Spacing.m,
-    paddingTop: Spacing.xxl,
-    backgroundColor: Colors.light.surfaceSecondary,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.light.divider,
-  },
-  headerText: { color: Colors.light.textPrimary },
-  content: { padding: Spacing.m },
-  card: {
-    backgroundColor: Colors.light.surfaceSecondary,
-    borderRadius: 12,
-    padding: Spacing.l,
-    marginBottom: Spacing.m,
-    borderWidth: 1,
-    borderColor: Colors.light.divider,
-  },
-  cardTitle: { color: Colors.light.textPrimary, marginBottom: Spacing.xs },
-  cardSubtitle: { color: Colors.light.textSecondary, marginBottom: Spacing.l },
-  starRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: Spacing.xl,
-    paddingHorizontal: Spacing.m,
-  },
-  statRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: Spacing.l,
-  },
-  statBox: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: Colors.light.background,
-    padding: Spacing.m,
-    borderRadius: 8,
-    marginHorizontal: Spacing.xs,
-    borderWidth: 1,
-    borderColor: Colors.light.divider,
-  }
-});

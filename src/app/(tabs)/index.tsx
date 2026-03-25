@@ -54,7 +54,7 @@ export default function MapScreen() {
                 <Text className="text-xl font-bold text-primary">4.2<Text className="text-xs text-on-surface-variant">/5</Text></Text>
             </View>
         </View>
-        <TouchableOpacity className="mt-4 pt-3 border-t border-outline-variant/20 flex-row items-center gap-2">
+        <TouchableOpacity onPress={() => router.push('/constituency/TVM-01' as never)} className="mt-4 pt-3 border-t border-outline-variant/20 flex-row items-center gap-2">
             <Text className="text-primary text-sm font-bold">View Constituency Details</Text>
             <MaterialIcons name="arrow-forward" size={16} color="#f5a623" />
         </TouchableOpacity>

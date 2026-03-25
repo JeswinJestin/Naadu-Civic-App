@@ -1,14 +1,16 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 export default function ExploreScreen() {
+  const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 py-4 bg-surface/90">
         <View className="flex-row items-center gap-4">
-          <TouchableOpacity className="p-2 -ml-2 rounded-full overflow-hidden active:bg-surface-container-high transition-colors">
+          <TouchableOpacity onPress={() => {}} className="p-2 -ml-2 rounded-full overflow-hidden active:bg-surface-container-high transition-colors">
             <MaterialIcons name="menu" size={24} color="#f5a623" />
           </TouchableOpacity>
           <Text className="text-xl font-bold text-primary tracking-tight">Activity Feed</Text>
@@ -61,7 +63,7 @@ export default function ExploreScreen() {
                 </View>
                 <Text className="text-sm text-[#adb9d1] mb-4 mt-1 leading-snug">Pothole detected near Secretariat entrance, Thiruvananthapuram. Impeding traffic flow.</Text>
                 <View className="flex-row items-center gap-3">
-                  <TouchableOpacity className="px-4 py-2 bg-primary-container rounded-lg">
+                  <TouchableOpacity onPress={() => router.push('/issue/123' as never)} className="px-4 py-2 bg-primary-container rounded-lg">
                     <Text className="text-[#644000] text-xs font-bold">View Details</Text>
                   </TouchableOpacity>
                   <View className="flex-row items-center gap-1">
